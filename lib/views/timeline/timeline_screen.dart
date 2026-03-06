@@ -136,7 +136,7 @@ class _TimelineScreenState extends State<TimelineScreen> {
 
   void _showCreateDialog() {
     if (_timelineCount >= 10) {
-      MessageHelper.showWarning(Globalization.msgMaxTimeline.tr);
+      MessageHelper.info(Globalization.msgMaxTimeline.tr);
       return;
     }
 
@@ -152,9 +152,9 @@ class _TimelineScreenState extends State<TimelineScreen> {
             if (image != null && captionController.text.trim().isNotEmpty) {
               _create(image!, captionController.text.trim());
             } else if (image == null) {
-              MessageHelper.showWarning(Globalization.msgImageEmpty.tr);
+              MessageHelper.warning(Globalization.msgImageEmpty.tr);
             } else if (captionController.text.trim().isEmpty) {
-              MessageHelper.showWarning(Globalization.msgFieldEmpty.tr);
+              MessageHelper.warning(Globalization.msgFieldEmpty.tr);
             }
           },
           content: SizedBox(
@@ -210,5 +210,5 @@ class _TimelineScreenState extends State<TimelineScreen> {
   );
 
   void _showDeleteDialog(TimelineModel timeline) =>
-      Get.dialog(CustomDialog(type: DialogType.confirmation, content: Globalization.msgConfirmationDelete.tr, onConfirm: () => _delete(timeline)));
+      Get.dialog(CustomConfirmationDialog(content: Globalization.msgConfirmationDelete.tr, onConfirm: () => _delete(timeline)));
 }

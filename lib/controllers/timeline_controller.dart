@@ -42,16 +42,16 @@ class TimelineController extends GetxController {
     final response = await _api.post(endPoint: "create-timeline", module: "TimelineController - createTimeline", data: data, file: file);
 
     if (response == null) {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     } else if (response.data[ApiService.keyStatusCode] == 200) {
       if (Get.isDialogOpen ?? false) Get.back();
 
-      MessageHelper.showSuccess(Globalization.msgCreateSuccess.trParams({"item": Globalization.timeline.tr.toLowerCase()}));
+      MessageHelper.success(Globalization.msgCreateSuccess.trParams({"item": Globalization.timeline.tr.toLowerCase()}));
 
       return true;
     } else {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     }
   }
@@ -62,16 +62,16 @@ class TimelineController extends GetxController {
     final response = await _api.delete(endPoint: "delete-timeline", module: "TimelineController - deleteTimeline", data: data);
 
     if (response == null) {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     } else if (response.data[ApiService.keyStatusCode] == 200) {
       if (Get.isDialogOpen ?? false) Get.back();
 
-      MessageHelper.showSuccess(Globalization.msgDeleteSuccess.trParams({"item": Globalization.timeline.tr}));
+      MessageHelper.success(Globalization.msgDeleteSuccess.trParams({"item": Globalization.timeline.tr}));
 
       return true;
     } else {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     }
   }

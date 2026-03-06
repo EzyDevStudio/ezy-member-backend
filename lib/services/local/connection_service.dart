@@ -10,7 +10,7 @@ class ConnectionService {
   static Future<bool> checkConnection() async {
     final List<ConnectivityResult> result = await Connectivity().checkConnectivity();
 
-    if (result.contains(ConnectivityResult.none)) MessageHelper.showDisconnected();
+    if (result.contains(ConnectivityResult.none)) MessageHelper.disconnected();
 
     return !result.contains(ConnectivityResult.none);
   }

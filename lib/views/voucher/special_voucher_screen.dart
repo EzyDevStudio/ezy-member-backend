@@ -136,10 +136,10 @@ class _SpecialVoucherScreenState extends State<SpecialVoucherScreen> {
 
   void _showDeleteDialog(VoucherModel voucher) {
     if (voucher.startCollectDate.isExpiredToday) {
-      MessageHelper.showWarning(Globalization.msgVoucherReleased.tr);
+      MessageHelper.info(Globalization.msgVoucherReleased.tr);
       return;
     }
 
-    Get.dialog(CustomDialog(type: DialogType.confirmation, content: Globalization.msgConfirmationDelete.tr, onConfirm: () => _delete(voucher)));
+    Get.dialog(CustomConfirmationDialog(content: Globalization.msgConfirmationDelete.tr, onConfirm: () => _delete(voucher)));
   }
 }

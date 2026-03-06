@@ -129,7 +129,7 @@ class _BranchItemWidgetState extends State<BranchItemWidget> {
       String longitude = _longitudeController.text.trim();
 
       if (name.isEmpty || description.isEmpty || contact1.isEmpty || address1.isEmpty || postcode.isEmpty || city.isEmpty || state.isEmpty) {
-        MessageHelper.showWarning(Globalization.msgFieldRequired.tr);
+        MessageHelper.warning(Globalization.msgFieldRequired.tr);
       } else {
         Map<String, dynamic> data = {
           if (widget.branch != null) "branch_code": widget.branch!.branchCode,

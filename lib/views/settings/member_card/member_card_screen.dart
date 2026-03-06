@@ -132,10 +132,10 @@ class _MemberCardScreenState extends State<MemberCardScreen> {
 
   void _showDeleteDialog(MemberCardModel card) {
     if (card.isDefault == 1) {
-      MessageHelper.showWarning(Globalization.msgDeleteDefaultCard.tr);
+      MessageHelper.info(Globalization.msgDeleteDefaultCard.tr);
       return;
     }
 
-    Get.dialog(CustomDialog(type: DialogType.confirmation, content: Globalization.msgConfirmationDelete.tr, onConfirm: () => _delete(card)));
+    Get.dialog(CustomConfirmationDialog(content: Globalization.msgConfirmationDelete.tr, onConfirm: () => _delete(card)));
   }
 }

@@ -54,29 +54,33 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
       children: <Widget>[
         CustomDashboardCard(
-          isThisMonth: false,
           color: Colors.red,
+          iconColor: Colors.red,
           icon: Icons.supervisor_account_rounded,
           data: _dashboardController.totalMember.value.toString(),
           title: Globalization.totalMember.tr,
         ),
         CustomDashboardCard(
+          isThisMonth: true,
           color: Colors.blue,
+          iconColor: Colors.blue,
           icon: Icons.person_2_rounded,
           data: _dashboardController.cmMember.value.toString(),
           title: Globalization.newMember.tr,
         ),
         CustomDashboardCard(
           color: Colors.green,
+          iconColor: Colors.green,
           icon: Icons.attach_money_rounded,
-          data: _dashboardController.cmPointHistory.value.toString(),
-          title: Globalization.pointHistory.tr,
+          data: (_dashboardController.totalMember.value - _dashboardController.totalExpiredMember.value).toString(),
+          title: Globalization.memberActive.tr,
         ),
         CustomDashboardCard(
           color: Colors.purple,
+          iconColor: Colors.purple,
           icon: Icons.credit_card_rounded,
-          data: _dashboardController.cmCreditHistory.value.toString(),
-          title: Globalization.creditHistory.tr,
+          data: _dashboardController.totalExpiredMember.value.toString(),
+          title: Globalization.memberExpired.tr,
         ),
       ],
     ),
@@ -84,19 +88,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Widget _buildChartSection() => Obx(() {
     final charts = [
-      CustomPieChart(
-        title: Globalization.memberSummary.tr,
-        data: {
-          Globalization.active.tr: (_dashboardController.totalMember.value - _dashboardController.totalExpiredMember.value).toDouble(),
-          Globalization.expired.tr: _dashboardController.totalExpiredMember.value.toDouble(),
-        },
-      ),
-      CustomPieChart(title: Globalization.memberCardSummary.tr, data: _dashboardController.cards),
       CustomLineChart(
         title: "${Globalization.memberJoined.tr} (6 months)",
         data: _dashboardController.monthlyMember,
         keys: ["total"],
         labels: [Globalization.totalMember.tr],
+      ),
+
+      CustomPieChart(
+        title: Globalization.memberSummary.tr,
+        data: {
+          Globalization.memberActive.tr: (_dashboardController.totalMember.value - _dashboardController.totalExpiredMember.value).toDouble(),
+          Globalization.memberExpired.tr: _dashboardController.totalExpiredMember.value.toDouble(),
+        },
       ),
       CustomLineChart(
         title: "${Globalization.monthlyTransaction.tr} (6 months)",

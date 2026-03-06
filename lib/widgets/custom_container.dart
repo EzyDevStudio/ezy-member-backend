@@ -1,18 +1,57 @@
 import 'dart:ui';
 
 import 'package:ezymember_backend/constants/app_constants.dart';
+import 'package:ezymember_backend/helpers/responsive_helper.dart';
 import 'package:ezymember_backend/widgets/custom_text.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
-BoxDecoration decoration = BoxDecoration(
-  borderRadius: BorderRadius.circular(kBorderRadius),
-  color: Colors.white,
-  boxShadow: <BoxShadow>[
-    BoxShadow(color: Colors.black12, blurRadius: 2.0, offset: const Offset(0.0, 0.5)),
-    BoxShadow(color: Colors.black12, blurRadius: 3.0, offset: const Offset(2.0, 2.0)),
-  ],
-);
+class CustomContainer extends StatelessWidget {
+  final Widget child;
+
+  const CustomContainer({super.key, required this.child});
+
+  @override
+  Widget build(BuildContext context) => Container(padding: EdgeInsets.all(context.isDesktop ? 16.0 : 8.0), decoration: kDecoration, child: child);
+}
+
+class CustomDottedContainer extends StatelessWidget {
+  final Color? color;
+  final double height, width;
+  final double? dashSpace, dashWidth, padding, strokeWidth;
+  final VoidCallback? onTap;
+  final Widget? child;
+
+  const CustomDottedContainer({
+    super.key,
+    this.color,
+    this.height = 0.0,
+    this.width = 0.0,
+    this.dashSpace,
+    this.dashWidth,
+    this.padding,
+    this.strokeWidth,
+    this.onTap,
+    this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) => InkWell(
+    borderRadius: BorderRadius.all(Radius.circular(kBorderRadius)),
+    onTap: onTap,
+    child: CustomPaint(
+      painter: _DottedBorderPainter(
+        borderRadius: BorderRadius.all(Radius.circular(kBorderRadius)),
+        color: color ?? Theme.of(context).colorScheme.primary,
+        dashSpace: dashSpace ?? 4.0,
+        dashWidth: dashWidth ?? 8.0,
+        strokeWidth: strokeWidth ?? 2.0,
+      ),
+      size: Size(width, height),
+      child: Padding(padding: EdgeInsets.all(padding ?? 0.0), child: child),
+    ),
+  );
+}
 
 class CustomImageContainer extends StatefulWidget {
   final double size;
@@ -36,7 +75,7 @@ class _CustomImageContainerState extends State<CustomImageContainer> {
     spacing: 8.0,
     children: <Widget>[
       Container(
-        decoration: decoration,
+        decoration: kDecoration,
         height: widget.size,
         width: widget.size,
         child: ClipRRect(borderRadius: BorderRadius.circular(kBorderRadius), child: _buildImage()),
@@ -74,7 +113,7 @@ class _CustomImageContainerState extends State<CustomImageContainer> {
       scale: pressed ? 0.8 : 1.0,
       duration: const Duration(milliseconds: 100),
       child: Container(
-        decoration: decoration,
+        decoration: kDecoration,
         height: widget.size * 0.3,
         width: widget.size * 0.3,
         child: ClipRRect(
@@ -85,44 +124,6 @@ class _CustomImageContainerState extends State<CustomImageContainer> {
           ),
         ),
       ),
-    ),
-  );
-}
-
-class CustomDottedContainer extends StatelessWidget {
-  final Color? color;
-  final double height, width;
-  final double? dashSpace, dashWidth, padding, strokeWidth;
-  final VoidCallback? onTap;
-  final Widget? child;
-
-  const CustomDottedContainer({
-    super.key,
-    this.color,
-    this.height = 0.0,
-    this.width = 0.0,
-    this.dashSpace,
-    this.dashWidth,
-    this.padding,
-    this.strokeWidth,
-    this.onTap,
-    this.child,
-  });
-
-  @override
-  Widget build(BuildContext context) => InkWell(
-    borderRadius: BorderRadius.all(Radius.circular(kBorderRadius)),
-    onTap: onTap,
-    child: CustomPaint(
-      painter: _DottedBorderPainter(
-        borderRadius: BorderRadius.all(Radius.circular(kBorderRadius)),
-        color: color ?? Theme.of(context).colorScheme.primary,
-        dashSpace: dashSpace ?? 4.0,
-        dashWidth: dashWidth ?? 8.0,
-        strokeWidth: strokeWidth ?? 2.0,
-      ),
-      size: Size(width, height),
-      child: Padding(padding: EdgeInsets.all(padding ?? 0.0), child: child),
     ),
   );
 }

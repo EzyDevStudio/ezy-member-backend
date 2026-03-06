@@ -142,7 +142,7 @@ class _MemberScreenState extends State<MemberScreen> {
     List<MemberHistoryModel> result = await _withLoading(() => _memberController.getRequest({"member_code": member.memberCode}));
 
     if (result.isNotEmpty) {
-      MessageHelper.showWarning(Globalization.msgMemberPending.tr);
+      MessageHelper.info(Globalization.msgMemberPending.tr);
       return;
     }
 
@@ -163,7 +163,7 @@ class _MemberScreenState extends State<MemberScreen> {
     if (_memberCards.isEmpty) {
       return;
     } else if (_authController.user.value.userType == 0) {
-      MessageHelper.showWarning(Globalization.msgNoPermission.tr);
+      MessageHelper.info(Globalization.msgNoPermission.tr);
       return;
     }
 
@@ -218,8 +218,7 @@ class _MemberScreenState extends State<MemberScreen> {
   }
 
   void _showChangeStatusDialog(MemberModel member) => Get.dialog(
-    CustomDialog(
-      type: DialogType.confirmation,
+    CustomConfirmationDialog(
       content: member.status == 0 ? Globalization.msgMemberActivate.tr : Globalization.msgMemberDeactivate.tr,
       onConfirm: () => _update({
         "member_code": member.memberCode,

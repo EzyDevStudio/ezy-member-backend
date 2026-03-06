@@ -227,7 +227,10 @@ class Globalization {
   static const String requestValue = "Request Value";
   static const String actionOn = "Action On";
   static const String actionReason = "Action Reason";
+  static const String information = "Information";
   static const String memberHistorySummary = "Member History Summary";
   static const String changePassword = "Change Password";
+  static const String memberActive = "Member Active";
+  static const String memberExpired = "Member Expired";
   static const String msgInactivity = "Your session is about to expire due to inactivity. Would you like to stay logged in?";
 }

@@ -123,7 +123,7 @@ class _AccessRoleScreenState extends State<AccessRoleScreen> {
             if (titleController.text.trim().isNotEmpty) {
               _create(titleController.text.trim());
             } else {
-              MessageHelper.showWarning(Globalization.msgFieldEmpty.tr);
+              MessageHelper.warning(Globalization.msgFieldEmpty.tr);
             }
           },
           content: SizedBox(

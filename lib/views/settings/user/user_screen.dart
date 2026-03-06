@@ -163,7 +163,7 @@ class _UserScreenState extends State<UserScreen> {
 
             if (name.isNotEmpty && email.isNotEmpty && (user != null || password.isNotEmpty)) {
               if (!RegExp(r"^[^\s@]+@[^\s@]+\.[^\s@]+$").hasMatch(email)) {
-                MessageHelper.showWarning(Globalization.msgInvalidEmailFormat.tr);
+                MessageHelper.warning(Globalization.msgInvalidEmailFormat.tr);
                 return;
               }
 
@@ -178,7 +178,7 @@ class _UserScreenState extends State<UserScreen> {
 
               user == null ? _create(data) : _update(data);
             } else {
-              MessageHelper.showWarning(Globalization.msgFieldEmpty.tr);
+              MessageHelper.warning(Globalization.msgFieldEmpty.tr);
             }
           },
           content: SizedBox(
@@ -228,10 +228,10 @@ class _UserScreenState extends State<UserScreen> {
 
   void _showDeleteDialog(UserModel user) {
     if (user.userType == 2 || user.userType == 1) {
-      MessageHelper.showWarning(Globalization.msgDeleteAdminError.tr);
+      MessageHelper.info(Globalization.msgDeleteAdminError.tr);
       return;
     }
 
-    Get.dialog(CustomDialog(type: DialogType.confirmation, content: Globalization.msgConfirmationDelete.tr, onConfirm: () => _delete(user)));
+    Get.dialog(CustomConfirmationDialog(content: Globalization.msgConfirmationDelete.tr, onConfirm: () => _delete(user)));
   }
 }

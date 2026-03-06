@@ -1,5 +1,4 @@
 import 'package:ezymember_backend/controllers/authentication_controller.dart';
-import 'package:ezymember_backend/models/member_card_model.dart';
 import 'package:ezymember_backend/services/remote/api_service.dart';
 import 'package:get/get.dart';
 
@@ -12,7 +11,6 @@ class DashboardController extends GetxController {
   var cmPointHistory = 0.obs;
   var totalMember = 0.obs;
   var totalExpiredMember = 0.obs;
-  var cards = <String, double>{}.obs;
   var monthlyMember = <Map<String, dynamic>>[].obs;
   var monthlyCredit = <Map<String, dynamic>>[].obs;
   var monthlyPoint = <Map<String, dynamic>>[].obs;
@@ -26,14 +24,11 @@ class DashboardController extends GetxController {
     if (response == null) return;
 
     if (response.data[ApiService.keyStatusCode] == 200) {
-      final List<dynamic> cardList = response.data[MemberCardModel.keyCard] ?? [];
-
       cmMember.value = response.data["current_month_member"];
       cmCreditHistory.value = response.data["current_month_credit_history"];
       cmPointHistory.value = response.data["current_month_point_history"];
       totalMember.value = response.data["total_member"];
       totalExpiredMember.value = response.data["total_expired_member"];
-      cards.value = MemberCardModel.toDashboardDataList(cardList);
       monthlyMember.value = List<Map<String, dynamic>>.from(response.data["monthly_member"] ?? []);
       monthlyCredit.value = List<Map<String, dynamic>>.from(response.data["monthly_credit"] ?? []);
       monthlyPoint.value = List<Map<String, dynamic>>.from(response.data["monthly_point"] ?? []);

@@ -164,7 +164,7 @@ class _VoucherItemWidgetState extends State<VoucherItemWidget> {
 
       if (widget.voucher != null) {
         if (quantity.isEmpty) {
-          MessageHelper.showWarning(Globalization.msgFieldEmpty.tr);
+          MessageHelper.warning(Globalization.msgFieldEmpty.tr);
           return;
         }
 
@@ -174,15 +174,15 @@ class _VoucherItemWidgetState extends State<VoucherItemWidget> {
       }
 
       if (description.isEmpty || discount.isEmpty || minimum.isEmpty || quantity.isEmpty || tnc.isEmpty) {
-        MessageHelper.showWarning(Globalization.msgFieldEmpty.tr);
+        MessageHelper.warning(Globalization.msgFieldEmpty.tr);
       } else if (widget.voucherType == 0 && (startCollect.isEmpty || endCollect.isEmpty || start.isEmpty || expired.isEmpty)) {
-        MessageHelper.showWarning(Globalization.msgDateEmpty.tr);
+        MessageHelper.warning(Globalization.msgDateEmpty.tr);
       } else if (widget.voucherType == 1 && _selectedMonths.isEmpty) {
-        MessageHelper.showWarning(Globalization.msgDateEmpty.tr);
+        MessageHelper.warning(Globalization.msgDateEmpty.tr);
       } else if (widget.voucherType == 1 && additional.isEmpty) {
-        MessageHelper.showWarning(Globalization.msgFieldEmpty.tr);
+        MessageHelper.warning(Globalization.msgFieldEmpty.tr);
       } else if (widget.voucherType == 1 && _selectedAction == 0 && pointRedeem.isEmpty) {
-        MessageHelper.showWarning(Globalization.msgFieldEmpty.tr);
+        MessageHelper.warning(Globalization.msgFieldEmpty.tr);
       } else {
         Map<String, dynamic> data = {
           "batch_description": description,

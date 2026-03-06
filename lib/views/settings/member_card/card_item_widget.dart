@@ -68,7 +68,7 @@ class _CardItemWidgetState extends State<CardItemWidget> {
     if (_image != null) {
       _handleOperation(() => _cardController.createMemberCard(data, _image!));
     } else {
-      MessageHelper.showWarning(Globalization.msgImageEmpty.tr);
+      MessageHelper.warning(Globalization.msgImageEmpty.tr);
     }
   }
 
@@ -95,9 +95,9 @@ class _CardItemWidgetState extends State<CardItemWidget> {
       String description = _descriptionController.text.trim();
 
       if (code.isEmpty || tier.isEmpty || description.isEmpty) {
-        MessageHelper.showWarning(Globalization.msgFieldEmpty.tr);
+        MessageHelper.warning(Globalization.msgFieldEmpty.tr);
       } else if (widget.card != null && widget.card!.isDefault == 1 && _selectedAction == 0) {
-        MessageHelper.showWarning(Globalization.msgDeleteDefaultCard.tr);
+        MessageHelper.info(Globalization.msgDeleteDefaultCard.tr);
       } else {
         Map<String, dynamic> data = {
           "card_code": _codeController.text.trim(),

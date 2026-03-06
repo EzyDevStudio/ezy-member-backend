@@ -41,16 +41,16 @@ class AccessRoleController extends GetxController {
     final response = await _api.post(endPoint: "create-access-role", module: "AccessRoleController - createAccessRole", data: data);
 
     if (response == null) {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     } else if (response.data[ApiService.keyStatusCode] == 200) {
       if (Get.isDialogOpen ?? false) Get.back(result: true);
 
-      MessageHelper.showSuccess(Globalization.msgCreateSuccess.trParams({"item": Globalization.accessRole.tr.toLowerCase()}));
+      MessageHelper.success(Globalization.msgCreateSuccess.trParams({"item": Globalization.accessRole.tr.toLowerCase()}));
 
       return true;
     } else {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     }
   }

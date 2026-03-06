@@ -100,7 +100,7 @@ class _MemberProcessWidgetState extends State<MemberProcessWidget> {
       }
 
       if (ids.isEmpty) {
-        MessageHelper.showWarning(Globalization.msgFieldRequest.tr);
+        MessageHelper.warning(Globalization.msgFieldRequest.tr);
       } else {
         _processRequest({"ids": ids, "statuses": statuses, "reasons": reasons});
       }

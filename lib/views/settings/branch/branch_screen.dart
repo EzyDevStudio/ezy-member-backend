@@ -142,5 +142,5 @@ class _BranchScreenState extends State<BranchScreen> {
   }
 
   void _showDeleteDialog(BranchModel branch) =>
-      Get.dialog(CustomDialog(type: DialogType.confirmation, content: Globalization.msgConfirmationDelete.tr, onConfirm: () => _delete(branch)));
+      Get.dialog(CustomConfirmationDialog(content: Globalization.msgConfirmationDelete.tr, onConfirm: () => _delete(branch)));
 }

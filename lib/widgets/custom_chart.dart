@@ -1,12 +1,13 @@
 import 'dart:math';
 
 import 'package:ezymember_backend/language/globalization.dart';
+import 'package:ezymember_backend/widgets/custom_container.dart';
 import 'package:ezymember_backend/widgets/custom_text.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-List<Color> colors = [Colors.red, Colors.orange, Colors.yellow, Colors.green, Colors.blue, Colors.cyan, Colors.purple];
+List<Color> colors = [Color(0xFF6366F1), Color(0xFFA855F7), Color(0xFF14B8A6)];
 
 double getMaxValue(Iterable<double> values) {
   if (values.isEmpty) return 10;
@@ -33,15 +34,7 @@ class CustomBarChart extends StatelessWidget {
     final values = data.values.toList();
     final maxY = getMaxValue(values);
 
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: const <BoxShadow>[
-          BoxShadow(color: Colors.black12, blurRadius: 2.0, offset: Offset(-1.0, -1.0)),
-          BoxShadow(color: Colors.black12, blurRadius: 2.0, offset: Offset(3.0, 3.0)),
-        ],
-      ),
-      padding: const EdgeInsets.all(16.0),
+    return CustomContainer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: 16.0,
@@ -116,15 +109,7 @@ class CustomLineChart extends StatelessWidget {
       lines.add(LineChartBarData(isCurved: true, color: colors[i % colors.length], barWidth: 3.0, spots: spots, dotData: FlDotData(show: true)));
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: const <BoxShadow>[
-          BoxShadow(color: Colors.black12, blurRadius: 2.0, offset: Offset(-1.0, -1.0)),
-          BoxShadow(color: Colors.black12, blurRadius: 2.0, offset: Offset(3.0, 3.0)),
-        ],
-      ),
-      padding: const EdgeInsets.all(16.0),
+    return CustomContainer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: 16.0,
@@ -185,15 +170,7 @@ class CustomPieChart extends StatelessWidget {
     final values = data.values.toList();
     final total = values.fold<double>(0.0, (a, b) => a + b);
 
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: const <BoxShadow>[
-          BoxShadow(color: Colors.black12, blurRadius: 2.0, offset: Offset(-1.0, -1.0)),
-          BoxShadow(color: Colors.black12, blurRadius: 2.0, offset: Offset(3.0, 3.0)),
-        ],
-      ),
-      padding: const EdgeInsets.all(16.0),
+    return CustomContainer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: 16.0,

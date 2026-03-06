@@ -68,16 +68,16 @@ class MemberController extends GetxController {
     final response = await _api.post(endPoint: "request-update", module: "MemberController - requestUpdate", data: data);
 
     if (response == null) {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     } else if (response.data[ApiService.keyStatusCode] == 200) {
       if (Get.isDialogOpen ?? false) Get.back(result: true);
 
-      MessageHelper.showSuccess(Globalization.msgUpdateSuccess.trParams({"item": Globalization.member.tr}));
+      MessageHelper.success(Globalization.msgUpdateSuccess.trParams({"item": Globalization.member.tr}));
 
       return true;
     } else {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     }
   }
@@ -88,14 +88,14 @@ class MemberController extends GetxController {
     final response = await _api.get(endPoint: "get-request", module: "MemberController - getRequest", data: data);
 
     if (response == null) {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return [];
     } else if (response.data[ApiService.keyStatusCode] == 200) {
       final List<dynamic> list = response.data[MemberHistoryModel.keyMemberHistory] ?? [];
 
       return list.map((e) => MemberHistoryModel.fromJson(e)).toList();
     } else {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return [];
     }
   }
@@ -106,16 +106,16 @@ class MemberController extends GetxController {
     final response = await _api.post(endPoint: "process-request", module: "MemberController - processRequest", data: data);
 
     if (response == null) {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     } else if (response.data[ApiService.keyStatusCode] == 200) {
       if (Get.isDialogOpen ?? false) Get.back(result: true);
 
-      MessageHelper.showSuccess(Globalization.msgUpdateSuccess.trParams({"item": Globalization.member.tr}));
+      MessageHelper.success(Globalization.msgUpdateSuccess.trParams({"item": Globalization.member.tr}));
 
       return true;
     } else {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     }
   }

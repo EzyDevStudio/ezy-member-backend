@@ -109,10 +109,10 @@ class _MemberRequestWidgetState extends State<MemberRequestWidget> {
 
       if (_isCardTier) {
         if (_selectedCard.cardTier == widget.initialCard.cardTier) {
-          MessageHelper.showWarning(Globalization.msgCardTierSimilar.tr);
+          MessageHelper.warning(Globalization.msgCardTierSimilar.tr);
           return;
         } else if (reasonTier.isEmpty) {
-          MessageHelper.showWarning(Globalization.msgFieldEmpty.tr);
+          MessageHelper.warning(Globalization.msgFieldEmpty.tr);
           return;
         } else {
           types.add(2);
@@ -123,7 +123,7 @@ class _MemberRequestWidgetState extends State<MemberRequestWidget> {
 
       if (_isCredit) {
         if (reasonCredit.isEmpty || credit.isEmpty) {
-          MessageHelper.showWarning(Globalization.msgFieldEmpty.tr);
+          MessageHelper.warning(Globalization.msgFieldEmpty.tr);
           return;
         } else {
           types.add(3);
@@ -134,7 +134,7 @@ class _MemberRequestWidgetState extends State<MemberRequestWidget> {
 
       if (_isPoint) {
         if (reasonPoint.isEmpty || point.isEmpty) {
-          MessageHelper.showWarning(Globalization.msgFieldEmpty.tr);
+          MessageHelper.warning(Globalization.msgFieldEmpty.tr);
           return;
         } else {
           types.add(4);

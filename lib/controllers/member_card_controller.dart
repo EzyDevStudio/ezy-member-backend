@@ -43,16 +43,16 @@ class MemberCardController extends GetxController {
     final response = await _api.post(endPoint: "create-member-card", module: "MemberCardController - createMemberCard", data: data, file: file);
 
     if (response == null) {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     } else if (response.data[ApiService.keyStatusCode] == 200) {
       if (Get.isDialogOpen ?? false) Get.back(result: true);
 
-      MessageHelper.showSuccess(Globalization.msgCreateSuccess.trParams({"item": Globalization.memberCard.tr.toLowerCase()}));
+      MessageHelper.success(Globalization.msgCreateSuccess.trParams({"item": Globalization.memberCard.tr.toLowerCase()}));
 
       return true;
     } else {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     }
   }
@@ -63,16 +63,16 @@ class MemberCardController extends GetxController {
     final response = await _api.post(endPoint: "update-member-card", module: "MemberCardController - updateMemberCard", data: data, file: file);
 
     if (response == null) {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     } else if (response.data[ApiService.keyStatusCode] == 200) {
       if (Get.isDialogOpen ?? false) Get.back(result: true);
 
-      MessageHelper.showSuccess(Globalization.msgUpdateSuccess.trParams({"item": Globalization.memberCard.tr}));
+      MessageHelper.success(Globalization.msgUpdateSuccess.trParams({"item": Globalization.memberCard.tr}));
 
       return true;
     } else {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     }
   }
@@ -83,19 +83,19 @@ class MemberCardController extends GetxController {
     final response = await _api.delete(endPoint: "delete-member-card", module: "MemberCardController - deleteMemberCard", data: data);
 
     if (response == null) {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     } else if (response.data[ApiService.keyStatusCode] == 200) {
       if (Get.isDialogOpen ?? false) Get.back();
 
-      MessageHelper.showSuccess(Globalization.msgDeleteSuccess.trParams({"item": Globalization.memberCard.tr}));
+      MessageHelper.success(Globalization.msgDeleteSuccess.trParams({"item": Globalization.memberCard.tr}));
 
       return true;
     } else if (response.data[ApiService.keyStatusCode] == 400) {
-      MessageHelper.showWarning(Globalization.msgCardInUse.tr);
+      MessageHelper.info(Globalization.msgCardInUse.tr);
       return true;
     } else {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     }
   }

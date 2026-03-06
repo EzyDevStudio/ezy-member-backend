@@ -94,7 +94,7 @@ class _InitialSetupScreenState extends State<InitialSetupScreen> {
         earnPrice.isEmpty ||
         redeemPoint.isEmpty ||
         redeemPrice.isEmpty) {
-      MessageHelper.showWarning(Globalization.msgFieldEmpty.tr);
+      MessageHelper.warning(Globalization.msgFieldEmpty.tr);
       return;
     }
 

@@ -44,7 +44,7 @@ class CompanyController extends GetxController {
     final response = await _api.post(endPoint: "update-company", module: "CompanyController - updateCompany", data: data, file: file);
 
     if (response == null) {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     } else if (response.data[ApiService.keyStatusCode] == 200) {
       final responsePOS = await _api.post(
@@ -59,18 +59,18 @@ class CompanyController extends GetxController {
       );
 
       if (responsePOS == null) {
-        MessageHelper.showWarning(Globalization.msgSystemError.tr);
+        MessageHelper.error(Globalization.msgSystemError.tr);
         return false;
       } else if (responsePOS.data[ApiService.keyStatusCode] == 200) {
-        MessageHelper.showSuccess(Globalization.msgUpdateSuccess.trParams({"item": Globalization.company.tr}));
+        MessageHelper.success(Globalization.msgUpdateSuccess.trParams({"item": Globalization.company.tr}));
 
         return true;
       } else {
-        MessageHelper.showWarning(Globalization.msgSystemError.tr);
+        MessageHelper.error(Globalization.msgSystemError.tr);
         return false;
       }
     } else {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     }
   }

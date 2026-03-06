@@ -63,16 +63,16 @@ class VoucherController extends GetxController {
     final response = await _api.post(endPoint: "create-voucher", module: "VoucherController - createVoucher", data: data);
 
     if (response == null) {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     } else if (response.data[ApiService.keyStatusCode] == 200) {
       if (Get.isDialogOpen ?? false) Get.back(result: true);
 
-      MessageHelper.showSuccess(Globalization.msgCreateSuccess.trParams({"item": Globalization.voucher.tr.toLowerCase()}));
+      MessageHelper.success(Globalization.msgCreateSuccess.trParams({"item": Globalization.voucher.tr.toLowerCase()}));
 
       return true;
     } else {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     }
   }
@@ -83,16 +83,16 @@ class VoucherController extends GetxController {
     final response = await _api.post(endPoint: "update-voucher", module: "VoucherController - updateVoucher", data: data);
 
     if (response == null) {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     } else if (response.data[ApiService.keyStatusCode] == 200) {
       if (Get.isDialogOpen ?? false) Get.back(result: true);
 
-      MessageHelper.showSuccess(Globalization.msgUpdateSuccess.trParams({"item": Globalization.voucher.tr}));
+      MessageHelper.success(Globalization.msgUpdateSuccess.trParams({"item": Globalization.voucher.tr}));
 
       return true;
     } else {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     }
   }
@@ -103,16 +103,16 @@ class VoucherController extends GetxController {
     final response = await _api.delete(endPoint: "delete-voucher", module: "VoucherController - deleteVoucher", data: data);
 
     if (response == null) {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     } else if (response.data[ApiService.keyStatusCode] == 200) {
       if (Get.isDialogOpen ?? false) Get.back();
 
-      MessageHelper.showSuccess(Globalization.msgDeleteSuccess.trParams({"item": Globalization.voucher.tr}));
+      MessageHelper.success(Globalization.msgDeleteSuccess.trParams({"item": Globalization.voucher.tr}));
 
       return true;
     } else {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     }
   }

@@ -30,7 +30,7 @@ class AuthController extends GetxController {
 
     Get.offAllNamed(AppRoutes.dashboard);
 
-    if (expiryDate.isBefore(DateTime.now())) MessageHelper.showWarning(Globalization.msgCustomerExpired.tr);
+    if (expiryDate.isBefore(DateTime.now())) MessageHelper.info(Globalization.msgCustomerExpired.tr);
   }
 
   void signOut() {
@@ -52,7 +52,7 @@ class AuthController extends GetxController {
     );
 
     if (responsePOS == null) {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
     } else if (responsePOS.data[ApiService.keyStatusCode] == 200) {
       String value = (responsePOS.data["expired_date"] ?? "0");
       DateTime expiryDate = value.strToDT;
@@ -63,17 +63,17 @@ class AuthController extends GetxController {
       final response = await _api.post(endPoint: "login", module: "AuthController - login", data: data);
 
       if (response == null) {
-        MessageHelper.showWarning(Globalization.msgSystemError.tr);
+        MessageHelper.error(Globalization.msgSystemError.tr);
       } else if (response.data[ApiService.keyStatusCode] == 200) {
         user.value = UserModel.login(response.data[UserModel.keyUser], companyID, databaseName);
         signIn(user.value, expiryDate);
       } else {
-        MessageHelper.showWarning(Globalization.msgLoginFailed.tr);
+        MessageHelper.warning(Globalization.msgLoginFailed.tr);
       }
     } else if (responsePOS.data[ApiService.keyStatusCode] == 400) {
-      MessageHelper.showWarning(Globalization.msgLoginFailed.tr);
+      MessageHelper.warning(Globalization.msgLoginFailed.tr);
     } else if (responsePOS.data[ApiService.keyStatusCode] == 401) {
-      MessageHelper.showWarning(Globalization.msgCustomerInactive.tr);
+      MessageHelper.warning(Globalization.msgCustomerInactive.tr);
     }
   }
 }

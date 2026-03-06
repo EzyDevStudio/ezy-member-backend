@@ -37,7 +37,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
     String password = _passwordController.text.trim();
 
     if (companyID.isEmpty || email.isEmpty || password.isEmpty) {
-      MessageHelper.showWarning(Globalization.msgFieldEmpty.tr);
+      MessageHelper.warning(Globalization.msgFieldEmpty.tr);
       return;
     }
 

@@ -1,48 +1,54 @@
 import 'package:ezymember_backend/language/globalization.dart';
+import 'package:ezymember_backend/widgets/custom_container.dart';
 import 'package:ezymember_backend/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CustomDashboardCard extends StatelessWidget {
   final bool isThisMonth;
-  final Color color;
+  final Color color, iconColor;
   final IconData icon;
   final String data, title;
 
-  const CustomDashboardCard({super.key, this.isThisMonth = true, required this.color, required this.icon, required this.data, required this.title});
+  const CustomDashboardCard({
+    super.key,
+    this.isThisMonth = false,
+    required this.color,
+    required this.iconColor,
+    required this.icon,
+    required this.data,
+    required this.title,
+  });
 
   @override
-  Widget build(BuildContext context) => Container(
-    decoration: BoxDecoration(
-      color: color,
-      boxShadow: <BoxShadow>[BoxShadow(color: Colors.black26, blurRadius: 2.0, offset: const Offset(3.0, 3.0))],
-    ),
-    padding: const EdgeInsets.all(16.0),
+  Widget build(BuildContext context) => CustomContainer(
     child: Row(
-      crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              CustomText(title, color: Colors.white, fontSize: 18.0, fontWeight: FontWeight.bold),
+              CustomText(title, fontSize: 18.0, fontWeight: FontWeight.bold),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.baseline,
                 spacing: 8.0,
                 textBaseline: TextBaseline.alphabetic,
                 children: <Widget>[
-                  Flexible(
-                    child: CustomText(data, color: Colors.white, fontSize: 24.0, fontWeight: FontWeight.bold),
-                  ),
-                  if (isThisMonth)
-                    CustomText(Globalization.thisMonth.tr.toLowerCase(), color: Colors.white, fontSize: 12.0, fontWeight: FontWeight.bold),
+                  Flexible(child: CustomText(data, fontSize: 24.0, fontWeight: FontWeight.bold)),
+                  if (isThisMonth) CustomText(Globalization.thisMonth.tr.toLowerCase(), fontSize: 12.0, fontWeight: FontWeight.bold),
                 ],
               ),
             ],
           ),
         ),
-        LayoutBuilder(builder: (context, constraints) => Icon(icon, size: constraints.maxHeight * 0.7)),
+        LayoutBuilder(
+          builder: (context, constraints) => Container(
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(8.0), color: iconColor.withValues(alpha: 0.1)),
+            padding: EdgeInsets.all(8.0),
+            child: Icon(icon, color: iconColor, size: constraints.maxHeight * 0.3),
+          ),
+        ),
       ],
     ),
   );

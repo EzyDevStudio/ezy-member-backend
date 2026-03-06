@@ -45,25 +45,25 @@ class UserController extends GetxController {
     final response = await _api.post(endPoint: "create-user", module: "UserController - createUser", data: data);
 
     if (response == null) {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     } else if (response.data[ApiService.keyStatusCode] == 200) {
       if (Get.isDialogOpen ?? false) Get.back(result: true);
 
-      MessageHelper.showSuccess(Globalization.msgCreateSuccess.trParams({"item": Globalization.user.tr.toLowerCase()}));
+      MessageHelper.success(Globalization.msgCreateSuccess.trParams({"item": Globalization.user.tr.toLowerCase()}));
 
       return true;
     } else if (response.data[ApiService.keyStatusCode] == 400) {
-      MessageHelper.showWarning(Globalization.msgInUse.trParams({"label": Globalization.name.tr}));
+      MessageHelper.info(Globalization.msgInUse.trParams({"label": Globalization.name.tr}));
       return false;
     } else if (response.data[ApiService.keyStatusCode] == 401) {
-      MessageHelper.showWarning(Globalization.msgInUse.trParams({"label": Globalization.email.tr}));
+      MessageHelper.info(Globalization.msgInUse.trParams({"label": Globalization.email.tr}));
       return false;
     } else if (response.data[ApiService.keyStatusCode] == 402) {
-      MessageHelper.showWarning(Globalization.msgInUse.trParams({"label": Globalization.contactNumber.tr}));
+      MessageHelper.info(Globalization.msgInUse.trParams({"label": Globalization.contactNumber.tr}));
       return false;
     } else {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     }
   }
@@ -74,25 +74,25 @@ class UserController extends GetxController {
     final response = await _api.post(endPoint: "update-user", module: "UserController - updateUser", data: data);
 
     if (response == null) {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     } else if (response.data[ApiService.keyStatusCode] == 200) {
       if (Get.isDialogOpen ?? false) Get.back(result: true);
 
-      MessageHelper.showSuccess(Globalization.msgUpdateSuccess.trParams({"item": Globalization.user.tr}));
+      MessageHelper.success(Globalization.msgUpdateSuccess.trParams({"item": Globalization.user.tr}));
 
       return true;
     } else if (response.data[ApiService.keyStatusCode] == 400) {
-      MessageHelper.showWarning(Globalization.msgInUse.trParams({"label": Globalization.name.tr}));
+      MessageHelper.info(Globalization.msgInUse.trParams({"label": Globalization.name.tr}));
       return false;
     } else if (response.data[ApiService.keyStatusCode] == 401) {
-      MessageHelper.showWarning(Globalization.msgInUse.trParams({"label": Globalization.email.tr}));
+      MessageHelper.info(Globalization.msgInUse.trParams({"label": Globalization.email.tr}));
       return false;
     } else if (response.data[ApiService.keyStatusCode] == 402) {
-      MessageHelper.showWarning(Globalization.msgInUse.trParams({"label": Globalization.contactNumber.tr}));
+      MessageHelper.info(Globalization.msgInUse.trParams({"label": Globalization.contactNumber.tr}));
       return false;
     } else {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     }
   }
@@ -103,16 +103,16 @@ class UserController extends GetxController {
     final response = await _api.delete(endPoint: "delete-user", module: "UserController - deleteUser", data: data);
 
     if (response == null) {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     } else if (response.data[ApiService.keyStatusCode] == 200) {
       if (Get.isDialogOpen ?? false) Get.back();
 
-      MessageHelper.showSuccess(Globalization.msgDeleteSuccess.trParams({"item": Globalization.user.tr}));
+      MessageHelper.success(Globalization.msgDeleteSuccess.trParams({"item": Globalization.user.tr}));
 
       return true;
     } else {
-      MessageHelper.showWarning(Globalization.msgSystemError.tr);
+      MessageHelper.error(Globalization.msgSystemError.tr);
       return false;
     }
   }
